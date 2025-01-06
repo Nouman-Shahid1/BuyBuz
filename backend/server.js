@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Import the cors middleware
 const connectDB = require('./config/db');
 
 dotenv.config();
@@ -7,6 +8,13 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+// Use CORS middleware
+app.use(cors({
+    origin: '*', // Allow all origins (can be restricted to specific origins)
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+}));
 
 app.use(express.json());
 
