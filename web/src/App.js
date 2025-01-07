@@ -1,22 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import HomePage from './HomePage/HomePage';
-import AboutPage from './AboutPage/AboutPage';
-import ServicesPage from './ServicesPage/ServicesPage';
+import HomePage from './pages/HomePage/HomePage';
+import AboutPage from './pages/AboutPage/AboutPage';
+import ServicesPage from './pages/ServicesPage/ServicesPage';
 import AllProducts from './components/Products/AllProducts';
-import ContactPage from './components/contactPage/ContactPage';
+import ContactPage from './pages/ContactPage/ContactPage';
 import Login from './pages/LoginPage/login';
 import Checkout from './components/Checkout';
 import AdminDashboard from './pages/AdminPanel/Dashboard';
-
+import UserPage from './pages/AdminPanel/UserPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
 import PrivateRoute from './routes/PrivateRoute';
 import AdminRoute from './routes/AdminRoute';
 
 function App() {
-  const hideNavbarFooterRoutes = ['/login', '/admin'];
+  const hideNavbarFooterRoutes = ['/login', '/admin','/admin/users'];
   const currentPath = window.location.pathname;
 
   return (
@@ -44,6 +43,14 @@ function App() {
           element={
             <AdminRoute>
               <AdminDashboard />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <AdminRoute>
+              <UserPage/>
             </AdminRoute>
           }
         />

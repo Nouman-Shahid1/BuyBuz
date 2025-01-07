@@ -1,11 +1,11 @@
 import React from 'react'
 
-import ProductOne from '../assets/Images/ProductOne (2).jpeg'
-import ProductTwo from '../assets/Images/ProductTwoooo.jpeg'
-import ProductThree from "../assets/Images/ProductThreee (2).jpeg"
-import ProductFour from '../assets/Images/ProductForr.jpeg'
-import ProductFive from '../assets/Images/ProductFiv.jpeg'
-import ProductSix from '../assets/Images/Productsix.jpeg'
+import ProductOne from '../../assets/Images/ProductOne (2).jpeg'
+import ProductTwo from '../../assets/Images/ProductTwoooo.jpeg'
+import ProductThree from "../../assets/Images/ProductThreee (2).jpeg"
+import ProductFour from '../../assets/Images/ProductForr.jpeg'
+import ProductFive from '../../assets/Images/ProductFiv.jpeg'
+import ProductSix from '../../assets/Images/Productsix.jpeg'
 
 
 
