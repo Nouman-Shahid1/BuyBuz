@@ -113,5 +113,16 @@ const updateUserRole = async (req, res) => {
         return res.status(500).json({ message: 'Server error. Please try again later.' });
     }
 };
+// Logout User
+const logoutUser = async (req, res) => {
+    try {
+        // Invalidate the token on the client side (Remove token from client storage)
+        return res.status(200).json({ message: 'Logout successful.' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error. Please try again later.' });
+    }
+};
 
-module.exports = { registerUser, loginUser, updateUserRole };
+module.exports = { registerUser, loginUser, updateUserRole, logoutUser };
+

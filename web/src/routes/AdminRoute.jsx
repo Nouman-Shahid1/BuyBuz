@@ -2,13 +2,12 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const AdminRoute = ({ children }) => {
-    const isAuthenticated = () => {
-        const token = localStorage.getItem('authToken');
-        console.log('Checking authentication in AdminRoute:', token); 
-        return !!token;
-    };
+    const token = localStorage.getItem('authToken');
+    const userRole = localStorage.getItem('role'); // Get the user's role from localStorage
 
-    return isAuthenticated() ? children : <Navigate to="/login" replace />;
+    const isAdmin = token && userRole === 'admin';
+
+    return isAdmin ? children : <Navigate to="/login" replace />;
 };
 
 export default AdminRoute;

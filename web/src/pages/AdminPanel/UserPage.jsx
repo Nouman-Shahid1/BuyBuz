@@ -79,6 +79,11 @@ const UsersPage = () => {
       user.email.toLowerCase().includes(search.toLowerCase()) ||
       user.role.toLowerCase().includes(search.toLowerCase())
   );
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('role');
+    window.location.href = '/login';
+};
 
   // Pagination
   const indexOfLastUser = currentPage * usersPerPage;
@@ -169,7 +174,7 @@ const UsersPage = () => {
               <h1 className="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
               <div className="flex items-center space-x-4">
                 <span className="text-gray-800 font-medium">Welcome, Admin</span>
-                <button className="px-4 py-2 bg-red-600 text-white rounded-full shadow-md hover:bg-red-700 transition">
+                <button onClick={handleLogout} className="px-4 py-2 bg-red-600 text-white rounded-full shadow-md hover:bg-red-700 transition">
                   Logout
                 </button>
               </div>

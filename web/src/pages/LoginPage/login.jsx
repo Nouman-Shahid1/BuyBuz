@@ -23,21 +23,28 @@ function AuthForm() {
             });
     
             const data = await response.json();
-            console.log('Login response:', data); 
+            console.log('Login response:', data);
     
             if (response.ok) {
                 setSuccessMessage('Login successful!');
                 setErrorMessage('');
     
                 if (data.token) {
-                    localStorage.setItem('authToken', data.token); 
+                    localStorage.setItem('authToken', data.token); // Save the token
+                    localStorage.setItem('role', data.role); // Save the user's role
+                    localStorage.setItem('name', data.name || ''); // Save the user's name
                 } else {
                     console.error('No token returned from server');
                     setErrorMessage('No token returned from server');
                     return;
                 }
     
-                navigate('/admin');
+                // Redirect based on role
+                if (data.role === 'admin') {
+                    navigate('/admin');
+                } else {
+                    navigate('/');
+                }
             } else {
                 setErrorMessage(data.message || 'Login failed');
                 setSuccessMessage('');
@@ -48,6 +55,7 @@ function AuthForm() {
             console.error('Login error:', error);
         }
     };
+    
     
     
     

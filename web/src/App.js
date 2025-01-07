@@ -13,50 +13,53 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import PrivateRoute from './routes/PrivateRoute';
 import AdminRoute from './routes/AdminRoute';
+import { CartProvider } from "./context/cartContext";
 
 function App() {
-  const hideNavbarFooterRoutes = ['/login', '/admin','/admin/users'];
+  const hideNavbarFooterRoutes = ['/login', '/admin', '/admin/users'];
   const currentPath = window.location.pathname;
 
   return (
-    <div className="App">
-      {!hideNavbarFooterRoutes.includes(currentPath) && <Navbar />}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/products" element={<AllProducts />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/login" element={<Login />} />
+    <CartProvider>
+      <div className="App">
+        {!hideNavbarFooterRoutes.includes(currentPath) && <Navbar />}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/products" element={<AllProducts />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/checkout"
-          element={
-            <PrivateRoute>
-              <Checkout />
-            </PrivateRoute>
-          }
-        />
+          <Route
+            path="/checkout"
+            element={
+              <PrivateRoute>
+                <Checkout />
+              </PrivateRoute>
+            }
+          />
 
-        <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <AdminDashboard />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/users"
-          element={
-            <AdminRoute>
-              <UserPage/>
-            </AdminRoute>
-          }
-        />
-      </Routes>
-      {!hideNavbarFooterRoutes.includes(currentPath) && <Footer />}
-    </div>
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <AdminRoute>
+                <UserPage />
+              </AdminRoute>
+            }
+          />
+        </Routes>
+        {!hideNavbarFooterRoutes.includes(currentPath) && <Footer />}
+      </div>
+    </CartProvider>
   );
 }
 
