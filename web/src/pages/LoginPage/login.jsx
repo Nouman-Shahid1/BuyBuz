@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 function AuthForm() {
-    const [isLogin, setIsLogin] = useState(true); // Toggle between Login and Signup
+    const [isLogin, setIsLogin] = useState(true); 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState(''); // For Sign Up
-    const [confirmPassword, setConfirmPassword] = useState(''); // For Sign Up
+    const [name, setName] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
@@ -21,14 +21,23 @@ function AuthForm() {
                 },
                 body: JSON.stringify({ email, password }),
             });
-
+    
             const data = await response.json();
-
+            console.log('Login response:', data); 
+    
             if (response.ok) {
                 setSuccessMessage('Login successful!');
                 setErrorMessage('');
-                console.log(data); // Handle login success
-                navigate('/'); // Redirect to the home page
+    
+                if (data.token) {
+                    localStorage.setItem('authToken', data.token); 
+                } else {
+                    console.error('No token returned from server');
+                    setErrorMessage('No token returned from server');
+                    return;
+                }
+    
+                navigate('/admin');
             } else {
                 setErrorMessage(data.message || 'Login failed');
                 setSuccessMessage('');
@@ -36,17 +45,20 @@ function AuthForm() {
         } catch (error) {
             setErrorMessage('An error occurred during login');
             setSuccessMessage('');
-            console.error(error);
+            console.error('Login error:', error);
         }
     };
-
+    
+    
+    
+    
     const handleSignUp = async () => {
         if (password !== confirmPassword) {
             setErrorMessage('Passwords do not match');
             setSuccessMessage('');
             return;
         }
-
+    
         try {
             const response = await fetch('http://localhost:5000/api/auth/register', {
                 method: 'POST',
@@ -55,13 +67,19 @@ function AuthForm() {
                 },
                 body: JSON.stringify({ name, email, password }),
             });
-
+    
             const data = await response.json();
-
+    
             if (response.ok) {
                 setSuccessMessage('Sign-up successful!');
                 setErrorMessage('');
-                console.log(data); // Handle sign-up success
+    
+                // Save token or user info after signup
+                if (data.token) {
+                    localStorage.setItem('token', data.token); // Save the token
+                    localStorage.setItem('name', data.name || ''); // Save user's name (use "name" key)
+                }
+    
                 setTimeout(() => {
                     setIsLogin(true); // Switch to the login form
                     setSuccessMessage('');
@@ -76,6 +94,7 @@ function AuthForm() {
             console.error(error);
         }
     };
+    
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700">
@@ -142,11 +161,10 @@ function AuthForm() {
                                 />
                             </div>
 
-                            {/* Password Input */}
                             <div className="mt-4">
                                 <div className="flex justify-between">
                                     <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                                    <a href="#" className="text-xs text-blue-500 hover:underline">Forgot Password?</a>
+                                    <a href="/" className="text-xs text-blue-500 hover:underline">Forgot Password?</a>
                                 </div>
                                 <input
                                     className="bg-gray-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 border border-gray-300 rounded-lg py-2 px-4 block w-full"

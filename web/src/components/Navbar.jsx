@@ -6,6 +6,7 @@ import Logo from "../assets/h.png";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false); // State to toggle menu visibility
   const [isScrolled, setIsScrolled] = useState(false); // State for scroll detection
+  const [userName, setUserName] = useState(null); // State to store the user's name
 
   // Detect scroll event
   useEffect(() => {
@@ -17,6 +18,17 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  // Fetch user data from localStorage
+  useEffect(() => {
+    const storedUserName = localStorage.getItem('name');
+    console.log('Stored User Name:', storedUserName); // Debugging: Log the retrieved name
+    if (storedUserName) {
+        setUserName(storedUserName);
+    }
+}, []);
+
+
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -109,19 +121,27 @@ const Navbar = () => {
                   className="flex items-center space-x-2 px-3 py-2 transition-transform transform hover:scale-105"
                 >
                   <HiOutlineShoppingCart className="w-6 h-6 text-gray-800 hover:text-gray-600" />
-                 
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/account"
-                  className="flex items-center space-x-2 px-3 py-2 transition-transform transform hover:scale-105"
-                >
-                  <HiOutlineUser className="w-6 h-6 text-gray-800 hover:text-gray-600" />
-                  <span className="text-base font-medium text-gray-800 hover:text-gray-600">
-                    Account
-                  </span>
-                </Link>
+                {userName ? (
+                  <div className="flex items-center space-x-2 px-3 py-2">
+                    <HiOutlineUser className="w-6 h-6 text-gray-800 hover:text-gray-600" />
+                    <span className="text-base font-medium text-gray-800">
+                      {userName}
+                    </span>
+                  </div>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="flex items-center space-x-2 px-3 py-2 transition-transform transform hover:scale-105"
+                  >
+                    <HiOutlineUser className="w-6 h-6 text-gray-800 hover:text-gray-600" />
+                    <span className="text-base font-medium text-gray-800 hover:text-gray-600">
+                      Account
+                    </span>
+                  </Link>
+                )}
               </li>
             </ul>
           </div>

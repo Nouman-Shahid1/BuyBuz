@@ -35,7 +35,7 @@ const AllProducts = () => {
     class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
 
 <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={productSeven}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -58,7 +58,7 @@ const AllProducts = () => {
         </a>
     </div>
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ ProductEight}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -82,7 +82,7 @@ const AllProducts = () => {
     </div>
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
         <img src={ ProductNine}
 
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
@@ -107,7 +107,7 @@ const AllProducts = () => {
     </div>
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ProductTen}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -131,7 +131,7 @@ const AllProducts = () => {
     </div>
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ProductEleven}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -155,7 +155,7 @@ const AllProducts = () => {
     </div>
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ProductTwelve}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -188,7 +188,7 @@ const AllProducts = () => {
     class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ProductThirteen}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -212,7 +212,7 @@ const AllProducts = () => {
     </div>
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ProductFourteen}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -236,7 +236,7 @@ const AllProducts = () => {
     </div>
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ProductFifteen}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -260,7 +260,7 @@ const AllProducts = () => {
     </div>
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ProductSixteen}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -284,7 +284,7 @@ const AllProducts = () => {
     </div>
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ProductSeventeen}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
@@ -308,7 +308,7 @@ const AllProducts = () => {
     </div>
 
     <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="#">
+        <a href="/">
             <img src={ProductEighteen}
                     alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
             <div class="px-4 py-3 w-72">
