@@ -1,5 +1,5 @@
 const User = require('../models/User');
-
+const mongoose = require('mongoose');
 // Get All Users (Admin Only)
 const getAllUsers = async (req, res) => {
     try {
@@ -57,20 +57,30 @@ const updateUserRole = async (req, res) => {
     }
 };
 
-// Delete User (Admin Only)
 const deleteUser = async (req, res) => {
     const { id } = req.params;
+
+    console.log("Delete request received for user ID:", id);
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.error("Invalid user ID format:", id);
+        return res.status(400).json({ message: 'Invalid user ID' });
+    }
 
     try {
         const user = await User.findById(id);
 
         if (!user) {
+            console.error("User not found for ID:", id);
             return res.status(404).json({ message: 'User not found' });
         }
 
-        await user.remove();
+        console.log("Deleting user:", user);
+        await User.deleteOne({ _id: id });
+        console.log("User deleted successfully");
         res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
+        console.error("Error deleting user:", error);
         res.status(500).json({ message: error.message });
     }
 };
