@@ -58,7 +58,7 @@ const AdminSidebar = () => {
           </li>
           <li>
             <a
-              href="/admin/category"
+              href="/admin/categories"
               className="flex items-center space-x-4 p-3 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all transform hover:scale-105"
             >
               <FaMoneyBillWave className="text-yellow-300 text-lg" />
@@ -67,11 +67,11 @@ const AdminSidebar = () => {
           </li>
           <li>
             <a
-              href="/admin/settings"
+              href="/admin/products"
               className="flex items-center space-x-4 p-3 rounded-lg bg-gray-800 hover:bg-gray-700 transition-all transform hover:scale-105"
             >
               <FaCogs className="text-yellow-300 text-lg" />
-              <span className="text-lg font-semibold">Settings</span>
+              <span className="text-lg font-semibold">Products</span>
             </a>
           </li>
         </ul>

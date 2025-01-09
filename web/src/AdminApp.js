@@ -6,7 +6,7 @@ import UsersPage from "./pages/AdminPanel/pages/UserPage";
 import OrdersPage from "./pages/AdminPanel/pages/OrdersPage";
 import RevenuePage from "./pages/AdminPanel/pages/RevenuePage";
 import SettingsPage from "./pages/AdminPanel/pages/SettingsPage";
-// import ProductPage from "./pages/AdminPanel/pages/ProductPage";
+import ProductPage from "./pages/AdminPanel/pages/ProductPage";
 import CategoryPage from "./pages/AdminPanel/pages/CategoryPage";
 
 const AdminApp = () => {
@@ -19,8 +19,8 @@ const AdminApp = () => {
         <Route path="orders" element={<OrdersPage />} /> {/* This handles /admin/orders */}
         <Route path="revenue" element={<RevenuePage />} /> {/* This handles /admin/revenue */}
         <Route path="settings" element={<SettingsPage />} /> {/* This handles /admin/settings */}
-        {/* <Route path="products" element={<ProductPage />} />  */}
-        <Route path="category" element={<CategoryPage />} /> {/* This handles /admin/settings */}
+        <Route path="products" element={<ProductPage />} /> 
+        <Route path="categories" element={<CategoryPage />} /> {/* This handles /admin/settings */}
 
       </Route>
     </Routes>
