@@ -13,9 +13,8 @@ const UsersPage = () => {
   const [usersPerPage] = useState(5);
   const [showCreateEditModal, setShowCreateEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null); // For editing or deleting users
+  const [selectedUser, setSelectedUser] = useState(null); 
 
-  // Fetch users
   const fetchUsers = async () => {
     const token = localStorage.getItem("authToken");
 
@@ -58,7 +57,6 @@ const UsersPage = () => {
     setShowDeleteModal(true);
   };
 
-  // Pagination
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users
@@ -195,7 +193,7 @@ const UsersPage = () => {
 
       {showDeleteModal && (
         <DeleteModal
-          user={selectedUser}
+        entityName={selectedUser.name}
           onClose={() => setShowDeleteModal(false)}
           onConfirm={async () => {
             const token = localStorage.getItem("authToken");

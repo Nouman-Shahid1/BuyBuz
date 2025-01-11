@@ -100,20 +100,7 @@ const navigation = {
     { name: "Stores", href: "#" },
   ],
 };
-const products = [
-  {
-    id: 1,
-    title: "Basic Tee",
-    href: "#",
-    price: "$32.00",
-    color: "Black",
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-  // More products...
-];
+
 const deliveryMethods = [
   {
     id: 1,
@@ -193,7 +180,7 @@ const CheckoutPage = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "email") {
-      setEmail(value); // Update email state
+      setEmail(value);
     } else {
       setShippingAddress((prev) => ({ ...prev, [name]: value }));
     }
@@ -203,14 +190,13 @@ const CheckoutPage = () => {
     if (token) {
         try {
             const decoded = jwtDecode(token);
-            console.log("Decoded token:", decoded); // Debugging
+            console.log("Decoded token:", decoded);
             
-            // Check if the token is expired
             if (decoded.exp * 1000 < Date.now()) {
                 setError("Session expired. Please log in again.");
-                localStorage.removeItem("authToken"); // Clear the invalid token
+                localStorage.removeItem("authToken"); 
             } else {
-                setUserId(decoded.id); // Extract only `id` from the token
+                setUserId(decoded.id); 
             }
         } catch (error) {
             console.error("Error decoding token:", error);
@@ -234,8 +220,8 @@ const CheckoutPage = () => {
   }
 
     const orderPayload = {
-      user: userId, // Ensure this is set
-      email,        // Ensure email is valid
+      user: userId, 
+      email,        
       items: cart.items.map((item) => ({
         product: item.id,
         quantity: item.quantity,
@@ -250,7 +236,7 @@ const CheckoutPage = () => {
       total: parseFloat(calculateOrderTotal()),
     };
   
-    console.log("Order payload:", orderPayload); // Debugging
+    console.log("Order payload:", orderPayload);
   
     try {
       const response = await axios.post("http://localhost:5000/api/orders", orderPayload);
@@ -267,7 +253,6 @@ const CheckoutPage = () => {
 
   return (
     <div className="bg-gray-50">
-      {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
@@ -307,7 +292,6 @@ const CheckoutPage = () => {
                 </button>
               </div>
 
-              {/* Links */}
               <Tab.Group as="div" className="mt-2">
                 <div className="border-b border-gray-200">
                   <Tab.List className="-mb-px flex px-4 space-x-8">

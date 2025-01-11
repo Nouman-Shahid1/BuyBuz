@@ -20,6 +20,7 @@ const AdminApp = () => {
         <Route path="settings" element={<SettingsPage />} />
         <Route path="products" element={<ProductPage />} />
         <Route path="categories" element={<CategoryPage />} />
+
       </Route>
     </Routes>
   );

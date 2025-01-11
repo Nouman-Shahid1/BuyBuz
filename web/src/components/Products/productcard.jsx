@@ -10,40 +10,47 @@ const ProductCard = ({ id, name, price, originalPrice, brand, image }) => {
   };
 
   return (
-    <div className="relative max-w-xs bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-lg overflow-hidden border border-gray-300 hover:border-blue-600 transition-all">
-      {/* Product Image */}
-      <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
+    <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+      <a href="#">
+        {/* Product Image */}
         <img
           src={image}
           alt={name}
-          className="h-full w-full object-cover rounded-t-xl"
+          className="h-80 w-72 object-cover rounded-t-xl"
         />
-        
-      </div>
-
-      {/* Product Details */}
-      <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-800 truncate hover:text-blue-600 transition">
-          {name}
-        </h2>
-        <div className="flex items-center mt-3">
-          <p className="text-xl font-bold text-blue-600">${price}</p>
-          {originalPrice && (
-            <p className="text-sm text-gray-400 line-through ml-3">${originalPrice}</p>
-          )}
+        {/* Product Details */}
+        <div className="px-4 py-3 w-72">
+          <span className="text-gray-400 mr-3 uppercase text-xs">{brand}</span>
+          <p className="text-lg font-bold text-black truncate capitalize">{name}</p>
+          <div className="flex items-center">
+            <p className="text-lg font-semibold text-black my-3">${price}</p>
+            {originalPrice && (
+              <del>
+                <p className="text-sm text-gray-600 ml-2">${originalPrice}</p>
+              </del>
+            )}
+            {/* Add to Cart Icon */}
+            <div className="ml-auto cursor-pointer" onClick={handleAddToCart}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                className="bi bi-bag-plus"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"
+                />
+                <path
+                  d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
-
-        {/* Buttons */}
-        <div className="flex items-center justify-between mt-5">
-          <button
-            onClick={handleAddToCart}
-            className="flex-1 bg-blue-600 text-white font-medium text-sm px-4 py-2 rounded-lg hover:bg-blue-700 shadow-md transition"
-          >
-            Add to Cart
-          </button>
-          
-        </div>
-      </div>
+      </a>
     </div>
   );
 };

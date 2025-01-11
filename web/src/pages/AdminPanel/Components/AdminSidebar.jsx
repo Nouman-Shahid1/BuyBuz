@@ -74,6 +74,7 @@ const AdminSidebar = () => {
               <span className="text-lg font-semibold">Products</span>
             </a>
           </li>
+          
         </ul>
       </nav>
 

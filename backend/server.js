@@ -24,10 +24,11 @@ if (process.env.NODE_ENV === 'development') {
 
 // CORS configuration
 app.use(cors({
-    origin: process.env.CLIENT_ORIGIN || '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: process.env.CLIENT_ORIGIN || "http://localhost:3000", // Allow frontend origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization", "Cache-Control"], // Include Cache-Control header
 }));
+
 
 // Serve uploaded images statically
 app.use('/uploads', express.static('uploads'));

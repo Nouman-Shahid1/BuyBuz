@@ -82,16 +82,15 @@ function AuthForm() {
                 setSuccessMessage('Sign-up successful!');
                 setErrorMessage('');
     
-                // Save token or user info after signup
                 if (data.token) {
-                    localStorage.setItem('token', data.token); // Save the token
-                    localStorage.setItem('name', data.name || ''); // Save user's name (use "name" key)
+                    localStorage.setItem('token', data.token); 
+                    localStorage.setItem('name', data.name || ''); 
                 }
     
                 setTimeout(() => {
-                    setIsLogin(true); // Switch to the login form
+                    setIsLogin(true); 
                     setSuccessMessage('');
-                }, 2000); // Wait 2 seconds before switching
+                }, 2000); 
             } else {
                 setErrorMessage(data.message || 'Sign-up failed');
                 setSuccessMessage('');
@@ -107,7 +106,6 @@ function AuthForm() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700">
             <div className="flex bg-white rounded-lg shadow-lg overflow-hidden max-w-4xl w-full transition-all duration-500 ease-in-out">
-                {/* Left Image Section */}
                 <div
                     className="hidden lg:block lg:w-1/2 bg-cover"
                     style={{
@@ -157,7 +155,6 @@ function AuthForm() {
                                 Login to start shopping your favorite items
                             </p>
 
-                            {/* Email Input */}
                             <div className="mt-6">
                                 <label className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
                                 <input
@@ -183,7 +180,6 @@ function AuthForm() {
                                 />
                             </div>
 
-                            {/* Login Button */}
                             <div className="mt-6">
                                 <button
                                     onClick={handleLogin}
@@ -195,7 +191,6 @@ function AuthForm() {
                         </div>
                     )}
 
-                    {/* Sign Up Form */}
                     {!isLogin && (
                         <div className="transition-all duration-500 ease-in-out">
                             <h2 className="text-3xl font-bold text-gray-800 text-center">Create Your Account</h2>
@@ -203,7 +198,6 @@ function AuthForm() {
                                 Sign up to start shopping with amazing deals
                             </p>
 
-                            {/* Name Input */}
                             <div className="mt-6">
                                 <label className="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
                                 <input
@@ -215,7 +209,6 @@ function AuthForm() {
                                 />
                             </div>
 
-                            {/* Email Input */}
                             <div className="mt-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
                                 <input
@@ -227,7 +220,6 @@ function AuthForm() {
                                 />
                             </div>
 
-                            {/* Password Input */}
                             <div className="mt-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
                                 <input
@@ -239,7 +231,6 @@ function AuthForm() {
                                 />
                             </div>
 
-                            {/* Confirm Password Input */}
                             <div className="mt-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
                                 <input
@@ -251,7 +242,6 @@ function AuthForm() {
                                 />
                             </div>
 
-                            {/* Sign Up Button */}
                             <div className="mt-6">
                                 <button
                                     onClick={handleSignUp}

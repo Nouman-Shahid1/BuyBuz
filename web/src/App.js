@@ -14,7 +14,7 @@ import AdminApp from "./AdminApp";
 import { CartProvider } from "./context/cartContext";
 
 function App() {
-  const hideNavbarFooterRoutes = ["/login", "/admin", "/admin/users", "/admin/categorios", "/admin/products"];
+  const hideNavbarFooterRoutes = ["/login", "/admin", "/admin/users", "/admin/categorios", "/admin/products","/admin/orders"];
   const location = useLocation();
   const currentPath = location.pathname;
 

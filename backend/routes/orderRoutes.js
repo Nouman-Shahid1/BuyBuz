@@ -45,6 +45,41 @@ router.post("/", async (req, res) => {
   });
   
   
+// Get all orders
+// Get all orders
+router.get("/", async (req, res) => {
+  try {
+    const orders = await Order.find()
+      .populate({
+        path: "items.product", // Populate the product field in items
+        select: "name price", // Include name and price fields from Product model
+      })
+      .sort({ createdAt: -1 }) // Sort by creation date
+      .exec();
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).json({ message: "Failed to fetch orders" });
+  }
+});
+router.delete("/:id", async (req, res) => {
+  try {
+    const order = await Order.findByIdAndDelete(req.params.id);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.status(200).json({ message: "Order deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting order:", error);
+    res.status(500).json({ message: "Failed to delete order", error });
+  }
+});
+
+
+
+
+
 
 // Get orders for a user
 router.get("/user/:userId", async (req, res) => {
