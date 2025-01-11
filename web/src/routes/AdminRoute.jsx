@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 const AdminRoute = ({ children }) => {
     const token = localStorage.getItem('authToken');
-    const userRole = localStorage.getItem('role'); // Get the user's role from localStorage
+    const userRole = localStorage.getItem('role');
 
     const isAdmin = token && userRole === 'admin';
 

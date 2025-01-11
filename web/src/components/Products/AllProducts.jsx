@@ -53,7 +53,7 @@ const AllProducts = () => {
       <h1 className="font-bold text-4xl mb-4">OUR FEATURED PRODUCTS</h1>
       <h2 className="text-3xl">Top Selling And New Arrivals</h2>
 
-      <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center gap-y-10 gap-x-14 mt-10 mb-5">
+      <div className="w-fit mx-auto grid grid-cols-1  xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 justify-items-center gap-y-10 gap-x-14 mt-10 mb-5">
         {products.map((product) => (
           <ProductCard
             key={product._id} // Assuming API uses _id as the unique identifier

@@ -12,16 +12,14 @@ import CategoryPage from "./pages/AdminPanel/pages/CategoryPage";
 const AdminApp = () => {
   return (
     <Routes>
-      {/* Admin routes wrapped with AdminLayout */}
       <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminDashboard />} /> {/* This handles /admin */}
-        <Route path="users" element={<UsersPage />} /> {/* This handles /admin/users */}
-        <Route path="orders" element={<OrdersPage />} /> {/* This handles /admin/orders */}
-        <Route path="revenue" element={<RevenuePage />} /> {/* This handles /admin/revenue */}
-        <Route path="settings" element={<SettingsPage />} /> {/* This handles /admin/settings */}
-        <Route path="products" element={<ProductPage />} /> 
-        <Route path="categories" element={<CategoryPage />} /> {/* This handles /admin/settings */}
-
+        <Route index element={<AdminDashboard />} />
+        <Route path="users" element={<UsersPage />} />
+        <Route path="orders" element={<OrdersPage />} />
+        <Route path="revenue" element={<RevenuePage />} />
+        <Route path="settings" element={<SettingsPage />} />
+        <Route path="products" element={<ProductPage />} />
+        <Route path="categories" element={<CategoryPage />} />
       </Route>
     </Routes>
   );

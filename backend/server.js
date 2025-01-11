@@ -37,7 +37,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/categories', require('./routes/categoryRoute'));
-
+app.use("/api/orders", require('./routes/orderRoutes'));
 // Handle 404 errors
 app.use((req, res, next) => {
     res.status(404).json({ message: 'API endpoint not found' });

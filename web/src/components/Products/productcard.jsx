@@ -1,48 +1,47 @@
 import React from "react";
-import { useCart } from "../../context/cartContext"; // Import cart context
+import { useCart } from "../../context/cartContext";
 
 const ProductCard = ({ id, name, price, originalPrice, brand, image }) => {
-  const { addToCart } = useCart(); // Access `addToCart` function from the cart context
+  const { addToCart } = useCart();
 
-  // Handle Add to Cart
   const handleAddToCart = () => {
-    const product = { id, name, price, image }; // Create a product object
-    addToCart(product); // Add product to cart
+    const product = { id, name, price, image };
+    addToCart(product);
   };
 
   return (
-    <div className="w-80 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transform duration-300 hover:scale-105">
+    <div className="relative max-w-xs bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-lg overflow-hidden border border-gray-300 hover:border-blue-600 transition-all">
       {/* Product Image */}
-      <div className="relative">
+      <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
         <img
           src={image}
           alt={name}
-          className="h-80 w-full object-cover rounded-t-lg"
+          className="h-full w-full object-cover rounded-t-xl"
         />
-        <span className="absolute top-2 left-2 bg-yellow-400 text-xs text-black font-semibold py-1 px-3 rounded-full uppercase">
-          {brand}
-        </span>
+        
       </div>
 
-      {/* Product Info */}
+      {/* Product Details */}
       <div className="p-4">
-        <h2 className="text-xl font-bold text-gray-800 truncate">{name}</h2>
-        <div className="flex items-center my-2">
-          <p className="text-lg font-semibold text-blue-600">${price}</p>
-          <del className="text-sm text-gray-500 ml-3">${originalPrice}</del>
+        <h2 className="text-lg font-semibold text-gray-800 truncate hover:text-blue-600 transition">
+          {name}
+        </h2>
+        <div className="flex items-center mt-3">
+          <p className="text-xl font-bold text-blue-600">${price}</p>
+          {originalPrice && (
+            <p className="text-sm text-gray-400 line-through ml-3">${originalPrice}</p>
+          )}
         </div>
-        <div className="flex justify-between items-center mt-4">
+
+        {/* Buttons */}
+        <div className="flex items-center justify-between mt-5">
           <button
             onClick={handleAddToCart}
-            className="bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition"
+            className="flex-1 bg-blue-600 text-white font-medium text-sm px-4 py-2 rounded-lg hover:bg-blue-700 shadow-md transition"
           >
             Add to Cart
           </button>
-          <button
-            className="bg-gray-100 text-gray-600 text-sm font-medium px-4 py-2 rounded-lg shadow hover:bg-gray-200 transition"
-          >
-            View Details
-          </button>
+          
         </div>
       </div>
     </div>

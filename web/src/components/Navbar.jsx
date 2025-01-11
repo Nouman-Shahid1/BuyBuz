@@ -256,7 +256,7 @@ const Navbar = () => {
               Clear Cart
             </button>
             <Link
-              to="/cart"
+              to="/checkout"
               className="text-sm text-blue-500 hover:underline"
             >
               Checkout
