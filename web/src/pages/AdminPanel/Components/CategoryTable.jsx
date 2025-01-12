@@ -49,8 +49,9 @@ const CategoryTable = ({
                 >
                   {/* Numbering Column */}
                   <td className="px-6 py-4 text-sm text-gray-700">
-                  {((currentPage || 1) - 1) * (categoriesPerPage || 1) + index + 1}
-
+                    {((currentPage || 1) - 1) * (categoriesPerPage || 1) +
+                      index +
+                      1}
                   </td>
                   {/* Name Column */}
                   <td className="px-6 py-4 text-sm text-gray-700 font-semibold">
@@ -66,11 +67,7 @@ const CategoryTable = ({
                       <span>Edit</span>
                     </button>
                     <button
-                      onClick={() =>
-                        window.confirm(
-                          "Are you sure you want to delete this?"
-                        ) && onDelete(category._id)
-                      }
+                      onClick={() => onDelete(category)}
                       className="text-red-500 hover:text-red-700 transition flex items-center gap-1 px-3 py-2 rounded-lg bg-red-50 hover:bg-red-100"
                     >
                       <FaTrash />
@@ -100,39 +97,6 @@ const CategoryTable = ({
           </div>
         </>
       )}
-
-      {/* Mobile View: Cards */}
-      <div className="md:hidden space-y-4 mt-6">
-        {categories.map((category, index) => (
-          <div
-            key={category._id}
-            className="bg-white shadow-lg rounded-lg p-4 border"
-          >
-            <p className="text-lg font-bold text-gray-700 mb-2">
-              {index + 1}. {category.name}
-            </p>
-            <div className="flex justify-end gap-4">
-              <button
-                onClick={() => onEdit(category)}
-                className="text-blue-500 hover:text-blue-700 transition flex items-center gap-1 px-3 py-2 rounded-lg bg-blue-50 hover:bg-blue-100"
-              >
-                <FaEdit />
-                <span>Edit</span>
-              </button>
-              <button
-                onClick={() =>
-                  window.confirm("Are you sure you want to delete this?") &&
-                  onDelete(category._id)
-                }
-                className="text-red-500 hover:text-red-700 transition flex items-center gap-1 px-3 py-2 rounded-lg bg-red-50 hover:bg-red-100"
-              >
-                <FaTrash />
-                <span>Delete</span>
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };
