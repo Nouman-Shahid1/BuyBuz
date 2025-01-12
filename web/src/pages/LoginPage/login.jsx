@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function AuthForm() {
     const [isLogin, setIsLogin] = useState(true); 
@@ -9,8 +9,9 @@ function AuthForm() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-
     const navigate = useNavigate();
+    const location = useLocation();
+    const referrer = location.state?.from || '/';
 
     const handleLogin = async () => {
         try {
@@ -39,11 +40,10 @@ function AuthForm() {
                     return;
                 }
     
-                // Redirect based on role
-                if (data.role === 'admin') {
+                  if (data.role === 'admin') {
                     navigate('/admin');
                 } else {
-                    navigate('/');
+                    navigate(referrer); 
                 }
             } else {
                 setErrorMessage(data.message || 'Login failed');

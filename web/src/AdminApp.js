@@ -8,11 +8,19 @@ import RevenuePage from "./pages/AdminPanel/pages/RevenuePage";
 import SettingsPage from "./pages/AdminPanel/pages/SettingsPage";
 import ProductPage from "./pages/AdminPanel/pages/ProductPage";
 import CategoryPage from "./pages/AdminPanel/pages/CategoryPage";
+import AdminRoute from "./routes/AdminRoute";
 
 const AdminApp = () => {
   return (
     <Routes>
-      <Route path="/admin" element={<AdminLayout />}>
+      <Route
+        path="/admin/*"
+        element={
+          <AdminRoute>
+            <AdminLayout />
+          </AdminRoute>
+        }
+      >
         <Route index element={<AdminDashboard />} />
         <Route path="users" element={<UsersPage />} />
         <Route path="orders" element={<OrdersPage />} />
@@ -20,7 +28,6 @@ const AdminApp = () => {
         <Route path="settings" element={<SettingsPage />} />
         <Route path="products" element={<ProductPage />} />
         <Route path="categories" element={<CategoryPage />} />
-
       </Route>
     </Routes>
   );

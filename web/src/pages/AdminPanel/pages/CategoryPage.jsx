@@ -11,6 +11,8 @@ const CategoryPage = () => {
   const [currentCategory, setCurrentCategory] = useState(null);
   const [loading, setLoading] = useState(false);
   const [deleteCategory, setDeleteCategory] = useState(null); // For delete modal
+  const [currentPage, setCurrentPage] = useState(1);
+  const [categoriesPerPage] = useState(5); // Items per page
 
   // Fetch categories from the backend
   const fetchCategories = async () => {
@@ -32,7 +34,9 @@ const CategoryPage = () => {
       await fetchCategories();
       setShowModal(false);
       toast.success(
-        currentCategory ? "Category updated successfully!" : "Category added successfully!"
+        currentCategory
+          ? "Category updated successfully!"
+          : "Category added successfully!"
       );
     } catch (error) {
       console.error("Error saving category:", error);
@@ -48,7 +52,9 @@ const CategoryPage = () => {
   // Confirm deletion of a category
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/categories/${deleteCategory._id}`);
+      await axios.delete(
+        `http://localhost:5000/api/categories/${deleteCategory._id}`
+      );
       fetchCategories();
       toast.success("Category deleted successfully!");
     } catch (error) {
@@ -62,10 +68,22 @@ const CategoryPage = () => {
     fetchCategories();
   }, []);
 
+  // Pagination Logic
+  const indexOfLastCategory = currentPage * categoriesPerPage;
+  const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
+  const currentCategories = categories.slice(
+    indexOfFirstCategory,
+    indexOfLastCategory
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="min-h-screen bg-gray-100 py-10">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Categories</h1>
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">
+          Categories
+        </h1>
         <div className="flex justify-end mb-4">
           <button
             onClick={() => {
@@ -77,19 +95,23 @@ const CategoryPage = () => {
             + Add Category
           </button>
         </div>
-        <div className="bg-white shadow rounded p-6">
+        <div className="">
           {loading ? (
             <div className="flex justify-center items-center">
-              <div className="spinner-border animate-spin border-t-4 border-blue-500 rounded-full w-12 h-12"></div>
+              <div className="animate-spin border-t-4 border-blue-500 border-4 rounded-full w-12 h-12"></div>
             </div>
           ) : (
             <CategoryTable
-              categories={categories}
+              categories={currentCategories}
               onEdit={(category) => {
                 setCurrentCategory(category);
                 setShowModal(true);
               }}
               onDelete={handleDelete} // Open delete modal
+              currentPage={currentPage}
+              categoriesPerPage={categoriesPerPage}
+              totalCategories={categories.length}
+              paginate={paginate}
             />
           )}
         </div>
@@ -97,7 +119,7 @@ const CategoryPage = () => {
         {/* Delete Confirmation Modal */}
         {deleteCategory && (
           <DeleteModal
-          entityName={deleteCategory.name}
+            entityName={deleteCategory.name}
             onClose={() => setDeleteCategory(null)}
             onConfirm={confirmDelete}
           />

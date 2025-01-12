@@ -4,14 +4,12 @@ const orderSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the User model
+      ref: "User",
       required: true,
     },
     email: {
       type: String,
-      required: true, // Email is now required
-    
-      
+      required: true,
     },
     items: [
       {
@@ -54,6 +52,11 @@ const orderSchema = new mongoose.Schema(
       type: String,
       enum: ["Pending", "Shipped", "Delivered", "Cancelled"],
       default: "Pending",
+    },
+    status: {
+      type: String,
+      enum: ["Pending", "Shipped", "Delivered", "Cancelled"], // Allowed values
+      default: "Pending", // Default value
     },
   },
   {

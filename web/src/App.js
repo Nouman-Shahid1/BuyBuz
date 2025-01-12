@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
@@ -14,7 +15,14 @@ import AdminApp from "./AdminApp";
 import { CartProvider } from "./context/cartContext";
 
 function App() {
-  const hideNavbarFooterRoutes = ["/login", "/admin", "/admin/users", "/admin/categorios", "/admin/products","/admin/orders"];
+  const hideNavbarFooterRoutes = [
+    "/login",
+    "/admin",
+    "/admin/users",
+    "/admin/categories",
+    "/admin/products",
+    "/admin/orders",
+  ];
   const location = useLocation();
   const currentPath = location.pathname;
 

@@ -15,7 +15,7 @@ const AdminLayout = () => {
             </span>
           </div>
         </header>
-        <main className="p-6 bg-gray-100 flex-1">
+        <main className="p-6 bg-gray-100 flex-1 overflow-auto">
           <Outlet /> {/* Render child routes here */}
         </main>
       </div>

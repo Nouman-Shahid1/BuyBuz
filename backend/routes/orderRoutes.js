@@ -43,10 +43,6 @@ router.post("/", async (req, res) => {
       res.status(500).json({ message: "Failed to create order", error });
     }
   });
-  
-  
-// Get all orders
-// Get all orders
 router.get("/", async (req, res) => {
   try {
     const orders = await Order.find()
@@ -73,6 +69,25 @@ router.delete("/:id", async (req, res) => {
   } catch (error) {
     console.error("Error deleting order:", error);
     res.status(500).json({ message: "Failed to delete order", error });
+  }
+});
+// Update order status
+router.put("/:id", async (req, res) => {
+  try {
+    const { status } = req.body;
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.status(200).json(updatedOrder);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to update order", error });
   }
 });
 

@@ -13,8 +13,9 @@ const UsersPage = () => {
   const [usersPerPage] = useState(5);
   const [showCreateEditModal, setShowCreateEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null); 
+  const [selectedUser, setSelectedUser] = useState(null);
 
+  // Fetch all users from the backend
   const fetchUsers = async () => {
     const token = localStorage.getItem("authToken");
 
@@ -57,16 +58,18 @@ const UsersPage = () => {
     setShowDeleteModal(true);
   };
 
+  // Filter users based on the search term
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(search.toLowerCase()) ||
+      user.email.toLowerCase().includes(search.toLowerCase()) ||
+      user.role.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Pagination logic
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users
-    .filter(
-      (user) =>
-        user.name.toLowerCase().includes(search.toLowerCase()) ||
-        user.email.toLowerCase().includes(search.toLowerCase()) ||
-        user.role.toLowerCase().includes(search.toLowerCase())
-    )
-    .slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -88,40 +91,44 @@ const UsersPage = () => {
   }
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Users Management</h1>
-        <button
-          onClick={() => handleCreateEdit(null)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition"
-        >
-          <FaPlus />
-          Create User
-        </button>
-      </div>
-
-      <div className="flex items-center justify-between mb-6">
-        <input
-          type="text"
-          placeholder="Search by name, email, or role..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full max-w-md px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <button
-          onClick={fetchUsers}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition ml-4"
-        >
-          <FaSyncAlt />
-          Refresh
-        </button>
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <div className="mb-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-4xl font-bold text-gray-800">Users Management</h1>
+          <button
+            onClick={() => handleCreateEdit(null)}
+            className="flex items-center gap-2 px-6 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition"
+          >
+            <FaPlus />
+            Create User
+          </button>
+        </div>
+        <div className="flex items-center justify-between mt-6">
+          <input
+            type="text"
+            placeholder="Search by name, email, or role..."
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1); // Reset to first page on new search
+            }}
+            className="w-full max-w-md px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            onClick={fetchUsers}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition ml-4"
+          >
+            <FaSyncAlt />
+            Refresh
+          </button>
+        </div>
       </div>
 
       <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
         <thead className="bg-gray-100">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-              ID
+              #
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
               Name
@@ -138,9 +145,16 @@ const UsersPage = () => {
           </tr>
         </thead>
         <tbody>
-          {currentUsers.map((user) => (
-            <tr key={user._id} className="hover:bg-gray-50">
-              <td className="px-6 py-4 text-sm text-gray-600">{user._id}</td>
+          {currentUsers.map((user, index) => (
+            <tr
+              key={user._id}
+              className={`hover:bg-gray-50 ${
+                index % 2 === 0 ? "bg-gray-50" : "bg-white"
+              } transition`}
+            >
+              <td className="px-6 py-4 text-sm text-gray-600">
+                {(currentPage - 1) * usersPerPage + index + 1}
+              </td>
               <td className="px-6 py-4 text-sm text-gray-800">{user.name}</td>
               <td className="px-6 py-4 text-sm text-gray-600">{user.email}</td>
               <td className="px-6 py-4 text-sm text-gray-600">{user.role}</td>
@@ -164,19 +178,21 @@ const UsersPage = () => {
       </table>
 
       <div className="flex justify-center items-center mt-6">
-        {[...Array(Math.ceil(users.length / usersPerPage)).keys()].map((number) => (
-          <button
-            key={number}
-            onClick={() => paginate(number + 1)}
-            className={`px-4 py-2 mx-1 rounded-md shadow-sm ${
-              currentPage === number + 1
-                ? "bg-blue-500 text-white"
-                : "bg-gray-100 text-gray-700"
-            } hover:bg-blue-600 hover:text-white transition`}
-          >
-            {number + 1}
-          </button>
-        ))}
+        {[...Array(Math.ceil(filteredUsers.length / usersPerPage)).keys()].map(
+          (number) => (
+            <button
+              key={number}
+              onClick={() => paginate(number + 1)}
+              className={`px-4 py-2 mx-1 rounded-md shadow-sm ${
+                currentPage === number + 1
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-100 text-gray-700"
+              } hover:bg-blue-600 hover:text-white transition`}
+            >
+              {number + 1}
+            </button>
+          )
+        )}
       </div>
 
       {/* Modals */}
@@ -193,14 +209,17 @@ const UsersPage = () => {
 
       {showDeleteModal && (
         <DeleteModal
-        entityName={selectedUser.name}
+          entityName={selectedUser.name}
           onClose={() => setShowDeleteModal(false)}
           onConfirm={async () => {
             const token = localStorage.getItem("authToken");
             try {
-              await axios.delete(`http://localhost:5000/api/users/${selectedUser._id}`, {
-                headers: { Authorization: `Bearer ${token}` },
-              });
+              await axios.delete(
+                `http://localhost:5000/api/users/${selectedUser._id}`,
+                {
+                  headers: { Authorization: `Bearer ${token}` },
+                }
+              );
               setShowDeleteModal(false);
               fetchUsers();
             } catch (err) {
